@@ -19,6 +19,14 @@ const getExercicios = async () => {
   return exerciciosList;
 };
 
+const getExerciciosByTreinoExercicio = async (treino_exercicio_id) => {
+  const params = {treino_exercicio_id};
+    return database.one(
+      "select e.id, e.nome from Exercicio e, Treino_Exercicio te where te.id = ${treino_exercicio_id} and e.id = te.exercicio_id",
+      params
+    )
+}
+
 const getExerciciosByModalidade = async (modalidade) => {
   const params = { modalidade };
   const response = await database.query(
@@ -52,5 +60,6 @@ module.exports = {
   getExercicios,
   getExerciciosByModalidade,
   getExercicio,
-  createExercicio
+  createExercicio,
+  getExerciciosByTreinoExercicio
 };
