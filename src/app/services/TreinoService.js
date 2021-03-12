@@ -18,7 +18,16 @@ const getTreino = async (id) => {
   return treino;
 };
 
+const createTreino = (aluno_id, instrutor_registro, nome, transaction) => {
+  const params = { aluno_id, instrutor_registro, nome };
+  return transaction.one(
+    "insert into Treino(aluno_id, instrutor_registro, nome) values(${aluno_id}, ${instrutor_registro}, ${nome}) RETURNING id",
+    params
+  );
+};
+
 module.exports = {
   getTreinosByAluno,
   getTreino,
+  createTreino,
 };

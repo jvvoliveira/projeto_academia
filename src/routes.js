@@ -19,5 +19,6 @@ routes.post('/exercicios', exercicioController.create);
 
 routes.get('/treinos/:aluno_id', treinoController.getAllByAluno);
 routes.get('/treino/:id', treinoController.getOne);
+routes.post('/treino', treinoController.create);
 
 module.exports = routes;
