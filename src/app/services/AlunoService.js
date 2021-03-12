@@ -1,12 +1,12 @@
 const database = require('../../config/database');
 
 const getAlunos = () => {
-    return database.query('select p.* from Pessoa p, Instrutor i where p.id != i.id');
+    return database.query('select p.* from only Pessoa p');
 }
 
 const getAluno = (id) => {
     const params = { id };
-    return database.one('select p.* from Pessoa p, Instrutor i where p.id = ${id} and p.id != i.id', params);
+    return database.one('select p.* from only Pessoa p where p.id = ${id}', params);
 }
 
 const createAluno = (nome, email) => {
