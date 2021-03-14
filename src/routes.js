@@ -10,6 +10,8 @@ const routes = new Router();
 routes.get('/alunos', alunoController.getAll);
 routes.get('/alunos/:id', alunoController.getOne);
 routes.post('/alunos', alunoController.create);
+routes.put('/alunos', alunoController.updateAluno);
+routes.delete('/alunos/:id', alunoController.deleteAluno);
 
 routes.get('/instrutores', instrutorController.getAll);
 
