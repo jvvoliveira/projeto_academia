@@ -21,5 +21,6 @@ routes.get('/treinos/:aluno_id', treinoController.getAllByAluno);
 routes.get('/treino/:id', treinoController.getOne);
 routes.put('/treino', treinoController.update);
 routes.post('/treino', treinoController.create);
+routes.delete('/treino/:id', treinoController.deleteTreino);
 
 module.exports = routes;

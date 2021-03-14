@@ -121,7 +121,7 @@ const update = async (req, res) => {
     await treinoService.getTreino(id);
   } catch (error) {
     if (error.result && error.result.rowCount === 0) {
-      return res.status(500).json({ error: "Treino ID não encontrado" });
+      return res.status(401).json({ error: "Treino ID não encontrado" });
     }
     return res.status(500).json(error);
   }
@@ -145,9 +145,26 @@ const update = async (req, res) => {
   return res.status(200).json({ message: "Treino atualizado com sucesso" });
 };
 
+const deleteTreino = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await treinoService.getTreino(id);
+  } catch (error) {
+    if (error.result && error.result.rowCount === 0) {
+      return res.status(401).json({ error: "Treino ID não encontrado" });
+    }
+    return res.status(500).json(error);
+  }
+
+  await treinoService.deleteTreino(id);
+  return res.status(200).json({message: "Treino deletado com sucesso"});
+}
+
 module.exports = {
   getAllByAluno,
   getOne,
   create,
   update,
+  deleteTreino
 };

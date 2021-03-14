@@ -31,9 +31,15 @@ const updateTreino = async (id, nome, realizacoes, transaction) => {
   return transaction.none("UPDATE Treino SET nome = ${nome}, realizacoes = ${realizacoes} WHERE id = ${id}", params);
 }
 
+const deleteTreino = async (id) => {
+  const params = {id};
+  return await database.none("delete from Treino where id = ${id}", params);
+}
+
 module.exports = {
   getTreinosByAluno,
   getTreino,
   createTreino,
-  updateTreino
+  updateTreino,
+  deleteTreino
 };

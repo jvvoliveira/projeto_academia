@@ -8,7 +8,7 @@ create table Pessoa(
 	nome varchar(50) not null,
 	email varchar(30) not null unique,
 	academia_id integer not null,
-	foreign key (academia_id) references Academia (id)
+	foreign key (academia_id) references Academia (id) on delete cascade
 )
 
 create table Instrutor(
@@ -24,7 +24,7 @@ create table Exercicio(
 	id serial primary key,
 	nome varchar(20) not null unique,
 	modalidade_id integer not null,
-	foreign key (modalidade_id) references Modalidade (id)
+	foreign key (modalidade_id) references Modalidade (id) on delete cascade
 )
 
 create table Treino(
@@ -33,7 +33,7 @@ create table Treino(
 	instrutor_registro varchar(10),	
 	nome varchar(20) not null,
 	realizacoes integer default 0,
-	foreign key (aluno_id) references Pessoa (id),
+	foreign key (aluno_id) references Pessoa (id) on delete cascade,
 	foreign key (instrutor_registro) references Instrutor (registro)
 )
 
@@ -43,7 +43,7 @@ create table Treino_Exercicio(
 	treino_id integer,
 	series integer not null default 3,
 	repeticoes integer not null default 10, 
-	descanso integer not null default 1, 
-	foreign key (exercicio_id) references Exercicio (id), 
-	foreign key (treino_id) references Treino (id)
+	descanso integer not null default 60, 
+	foreign key (exercicio_id) references Exercicio (id) on delete cascade, 
+	foreign key (treino_id) references Treino (id) on delete cascade
 )

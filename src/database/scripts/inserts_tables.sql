@@ -40,15 +40,15 @@ insert into exercicio (nome, modalidade_id) values ('Sentadilha', 7);
 insert into exercicio (nome, modalidade_id) values ('Elevação Lateral', 8);
 insert into exercicio (nome, modalidade_id) values ('Encolhimento Ombro', 8);
 
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 1, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 2, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 6, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 7, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 18, 3, 12, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 12, 3, 20, 1);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 1, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 2, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 6, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 7, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 18, 3, 12, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (1, 12, 3, 20, 60);
 
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 13, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 14, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 15, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 16, 3, 10, 1);
-insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 11, 3, 10, 1);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 13, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 14, 3, 12, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 15, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 16, 3, 10, 60);
+insert into treino_exercicio (treino_id, exercicio_id, series, repeticoes, descanso) values (2, 11, 3, 12, 60);
