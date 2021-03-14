@@ -1,7 +1,14 @@
+create table Academia(
+	id serial primary key,
+	nome varchar(50) not null
+)
+
 create table Pessoa(
 	id serial primary key,
 	nome varchar(50) not null,
-	email varchar(30) not null unique
+	email varchar(30) not null unique,
+	academia_id integer not null,
+	foreign key (academia_id) references Academia (id)
 )
 
 create table Instrutor(

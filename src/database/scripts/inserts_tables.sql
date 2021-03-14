@@ -1,10 +1,14 @@
-INSERT INTO Pessoa (nome, email) VALUES ('João Victor', 'jvv@email.com');
-INSERT INTO Pessoa (nome, email) VALUES ('Natacha', 'nat@email.com');
+INSERT INTO Academia (nome) VALUES ('HI');
+INSERT INTO Academia (nome) VALUES ('Match Fit');
 
-INSERT INTO Instrutor (nome, email, registro) VALUES ('Caio Henrique', 'caio_persoanl@email.com', '123456abc');
+INSERT INTO Pessoa (nome, email, academia_id) VALUES ('João Victor', 'jvv@email.com', 1);
+INSERT INTO Pessoa (nome, email, academia_id) VALUES ('Natacha', 'nat@email.com', 2);
 
-insert into Treino (aluno_id, instrutor_registro, nome, realizacoes) values (1, '123456abc', 'A Intermediário', 2);
-insert into Treino (aluno_id, instrutor_registro, nome) values (3, '123456abc', 'C Iniciante');
+INSERT INTO Instrutor (nome, email, registro, academia_id) VALUES ('Rodrigo', 'rod_personal@email.com', '456def', 1);
+INSERT INTO Instrutor (nome, email, registro, academia_id) VALUES ('Caio Henrique', 'caio_personal@email.com', '123456abc', 2);
+
+insert into Treino (aluno_id, instrutor_registro, nome, realizacoes) values (1, '456def', 'A Intermediário', 2);
+insert into Treino (aluno_id, instrutor_registro, nome) values (2, '123456abc', 'C Iniciante');
 
 insert into Modalidade (nome) values ('Peito');
 insert into Modalidade (nome) values ('Costas');
