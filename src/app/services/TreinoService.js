@@ -18,7 +18,7 @@ const getTreino = async (id) => {
   return treino;
 };
 
-const createTreino = (aluno_id, instrutor_registro, nome, transaction) => {
+const createTreino = async (aluno_id, instrutor_registro, nome, transaction) => {
   const params = { aluno_id, instrutor_registro, nome };
   return transaction.one(
     "insert into Treino(aluno_id, instrutor_registro, nome) values(${aluno_id}, ${instrutor_registro}, ${nome}) RETURNING id",
@@ -26,8 +26,14 @@ const createTreino = (aluno_id, instrutor_registro, nome, transaction) => {
   );
 };
 
+const updateTreino = async (id, nome, realizacoes, transaction) => {
+  const params = {id, nome, realizacoes};
+  return transaction.none("UPDATE Treino SET nome = ${nome}, realizacoes = ${realizacoes} WHERE id = ${id}", params);
+}
+
 module.exports = {
   getTreinosByAluno,
   getTreino,
   createTreino,
+  updateTreino
 };

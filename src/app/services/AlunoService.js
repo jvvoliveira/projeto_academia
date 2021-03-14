@@ -9,9 +9,9 @@ const getAluno = (id) => {
     return database.one('select p.* from only Pessoa p where p.id = ${id}', params);
 }
 
-const createAluno = (nome, email) => {
-    const params = {nome, email}
-    return database.none('insert into Pessoa(nome, email) values(${nome}, ${email})', params);
+const createAluno = (nome, email, academia_id) => {
+    const params = {nome, email, academia_id}
+    return database.none('insert into Pessoa(nome, email, academia_id) values(${nome}, ${email}, ${academia_id})', params);
 }
 
 module.exports = {

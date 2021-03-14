@@ -25,14 +25,14 @@ const getOne = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    const { email, nome } = req.body;
+    const { email, nome, academia_id } = req.body;
 
-    if(!email || !nome){
+    if(!email || !nome || !academia_id){
         return res.status(401).json({error: "Informe todos os campos necessários"});
     }
 
     try{
-        await service.createAluno(nome, email);
+        await service.createAluno(nome, email, academia_id);
         return res.json('Aluno criado com sucesso');
     }catch(error){
         if(error.constraint === 'pessoa_email_key' ){

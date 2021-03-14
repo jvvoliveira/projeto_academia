@@ -23,7 +23,29 @@ const createTreinoExercicio = (
   );
 };
 
+const updateTreinoExercicio = (
+  treino_exercicio_id,
+  exercicio_id,
+  series,
+  repeticoes,
+  descanso,
+  transaction
+) => {
+  const params = {
+    treino_exercicio_id,
+    exercicio_id,
+    series,
+    repeticoes,
+    descanso,
+  };
+  return transaction.none(
+    "update Treino_Exercicio set exercicio_id = ${exercicio_id}, series = ${series}, repeticoes = ${repeticoes}, descanso = ${descanso} where id = ${treino_exercicio_id}",
+    params
+  );
+};
+
 module.exports = {
   getTreinosExerciciosByTreinoId,
   createTreinoExercicio,
+  updateTreinoExercicio
 };

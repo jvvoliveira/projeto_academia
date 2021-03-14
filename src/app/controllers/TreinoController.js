@@ -111,11 +111,43 @@ const create = async (req, res) => {
     await Promise.all(createTreinosExercicios);
   });
 
-  return res.status(200).json({message: "Sucesso"});
+  return res.status(200).json({ message: "Sucesso" });
+};
+
+const update = async (req, res) => {
+  const { id, nome, realizacoes, treino_exercicios } = req.body;
+
+  try {
+    await treinoService.getTreino(id);
+  } catch (error) {
+    if (error.result && error.result.rowCount === 0) {
+      return res.status(500).json({ error: "Treino ID não encontrado" });
+    }
+    return res.status(500).json(error);
+  }
+
+  try{
+    await db.tx(async t => {
+      await treinoService.updateTreino(id, nome, realizacoes, t);
+  
+      if(treino_exercicios){
+        const promisesUpdateTreinoExercicio = treino_exercicios.map(async treino_exercicio => {
+          const { treino_exercicio_id , exercicio_id, series, repeticoes, descanso } = treino_exercicio;
+          await treinoExercicioService.updateTreinoExercicio(treino_exercicio_id, exercicio_id, series, repeticoes, descanso, t)
+        }) 
+        await Promise.all(promisesUpdateTreinoExercicio);
+      }
+    })
+  }catch(error){
+    res.status(401).json(error);
+  }
+
+  return res.status(200).json({ message: "Treino atualizado com sucesso" });
 };
 
 module.exports = {
   getAllByAluno,
   getOne,
   create,
+  update,
 };
