@@ -1,10 +1,12 @@
+require('dotenv/config');
+
 const pg = require('pg-promise')();
 const database = pg({
-    user: 'postgres',
-    password: 'root',
-    host: 'localhost',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    host: process.env.DB_HOST,
     port: 5432,
-    database: 'academia'
+    database: process.env.DB_NAME
 });
 
 module.exports = database;
