@@ -18,6 +18,7 @@ routes.get('/instrutores', instrutorController.getAll);
 routes.get('/exercicios', exercicioController.getAll);
 routes.get('/exercicios/:id', exercicioController.getOne);
 routes.post('/exercicios', exercicioController.create);
+routes.put('/exercicios', exercicioController.update);
 
 routes.get('/treinos/:aluno_id', treinoController.getAllByAluno);
 routes.get('/treino/:id', treinoController.getOne);

@@ -60,6 +60,12 @@ const create = async (req, res) => {
 const updateAluno = async (req, res) => {
   const { id, nome, academia_id } = req.body;
 
+  if (!id || !nome || !academia_id) {
+    return res
+      .status(401)
+      .json({ error: "Informe todos os campos necessários" });
+  }
+
   const existsAluno = await service.getAluno(id);
 
   if (!existsAluno) {

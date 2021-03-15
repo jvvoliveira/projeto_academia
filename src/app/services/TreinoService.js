@@ -11,7 +11,7 @@ const getTreinosByAluno = async (id) => {
 
 const getTreino = async (id) => {
   const params = { id };
-  const treino = await database.one(
+  const treino = await database.oneOrNone(
     "select t.* from Treino t where t.id = ${id}",
     params
   );

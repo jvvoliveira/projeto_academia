@@ -6,7 +6,7 @@ const getInstrutores = () => {
 
 const getInstrutorByRegistro = (registro) => {
     const params = {registro};
-    return database.one('select * from Instrutor i where i.registro = ${registro}', params);
+    return database.oneOrNone('select * from Instrutor i where i.registro = ${registro}', params);
 }
 
 module.exports = {

@@ -21,6 +21,9 @@ const getOne = async (req, res) => {
 
   try {
     const treino = await treinoService.getTreino(id);
+    if (!treino) {
+      return res.status(401).json({ error: "Treino ID não encontrado" });
+    }
 
     const aluno = await alunoService.getAluno(treino.aluno_id);
     const instrutor = await instrutorService.getInstrutorByRegistro(
@@ -57,9 +60,6 @@ const getOne = async (req, res) => {
     return res.json(response);
   } catch (error) {
     console.log(error);
-    if (error.result && error.result.rowCount === 0) {
-      return res.status(500).json({ error: "Treino ID não encontrado" });
-    }
     return res.status(500).json(error);
   }
 };
@@ -67,27 +67,20 @@ const getOne = async (req, res) => {
 const create = async (req, res) => {
   const { nome, aluno_id, instrutor_registro, treino_exercicios } = req.body;
 
-  try {
-    const existsAluno = await alunoService.getAluno(aluno_id);
-  } catch (error) {
-    if (error.result.rowCount === 0) {
-      return res.status(401).json({ error: "Aluno não encontrado" });
-    }
-    return res.status(401).json({ error });
+  const existsAluno = await alunoService.getAluno(aluno_id);
+
+  if (!existsAluno) {
+    return res.status(401).json({ error: "Aluno não encontrado" });
   }
 
-  try {
-    const existsInstrutor = await instrutorService.getInstrutorByRegistro(
-      instrutor_registro
-    );
-  } catch (error) {
-    if (error.result.rowCount === 0) {
-      return res.status(401).json({ error: "Instrutor não encontrado" });
-    }
-    return res.status(401).json({ error });
+  const existsInstrutor = await instrutorService.getInstrutorByRegistro(
+    instrutor_registro
+  );
+  if (!existsInstrutor) {
+    return res.status(401).json({ error: "Instrutor não encontrado" });
   }
 
-  const promise = await db.tx(async (t) => {
+  await db.tx(async (t) => {
     const treino = await treinoService.createTreino(
       aluno_id,
       instrutor_registro,
@@ -111,34 +104,45 @@ const create = async (req, res) => {
     await Promise.all(createTreinosExercicios);
   });
 
-  return res.status(200).json({ message: "Sucesso" });
+  return res.status(200).json({ message: "Treino criado com sucesso" });
 };
 
 const update = async (req, res) => {
   const { id, nome, realizacoes, treino_exercicios } = req.body;
 
-  try {
-    await treinoService.getTreino(id);
-  } catch (error) {
-    if (error.result && error.result.rowCount === 0) {
-      return res.status(401).json({ error: "Treino ID não encontrado" });
-    }
-    return res.status(500).json(error);
+  const existsTreino = await treinoService.getTreino(id);
+  if (!existsTreino) {
+    return res.status(401).json({ error: "Treino ID não encontrado" });
   }
 
-  try{
-    await db.tx(async t => {
+  try {
+    await db.tx(async (t) => {
       await treinoService.updateTreino(id, nome, realizacoes, t);
-  
-      if(treino_exercicios){
-        const promisesUpdateTreinoExercicio = treino_exercicios.map(async treino_exercicio => {
-          const { treino_exercicio_id , exercicio_id, series, repeticoes, descanso } = treino_exercicio;
-          await treinoExercicioService.updateTreinoExercicio(treino_exercicio_id, exercicio_id, series, repeticoes, descanso, t)
-        }) 
+
+      if (treino_exercicios) {
+        const promisesUpdateTreinoExercicio = treino_exercicios.map(
+          async (treino_exercicio) => {
+            const {
+              treino_exercicio_id,
+              exercicio_id,
+              series,
+              repeticoes,
+              descanso,
+            } = treino_exercicio;
+            await treinoExercicioService.updateTreinoExercicio(
+              treino_exercicio_id,
+              exercicio_id,
+              series,
+              repeticoes,
+              descanso,
+              t
+            );
+          }
+        );
         await Promise.all(promisesUpdateTreinoExercicio);
       }
-    })
-  }catch(error){
+    });
+  } catch (error) {
     res.status(401).json(error);
   }
 
@@ -148,23 +152,19 @@ const update = async (req, res) => {
 const deleteTreino = async (req, res) => {
   const { id } = req.params;
 
-  try {
-    await treinoService.getTreino(id);
-  } catch (error) {
-    if (error.result && error.result.rowCount === 0) {
-      return res.status(401).json({ error: "Treino ID não encontrado" });
-    }
-    return res.status(500).json(error);
+  const existsTreino = await treinoService.getTreino(id);
+  if (!existsTreino) {
+    return res.status(401).json({ error: "Treino ID não encontrado" });
   }
 
   await treinoService.deleteTreino(id);
-  return res.status(200).json({message: "Treino deletado com sucesso"});
-}
+  return res.status(200).json({ message: "Treino deletado com sucesso" });
+};
 
 module.exports = {
   getAllByAluno,
   getOne,
   create,
   update,
-  deleteTreino
+  deleteTreino,
 };
