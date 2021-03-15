@@ -4,6 +4,7 @@ const alunoController = require('./app/controllers/AlunoController');
 const instrutorController = require('./app/controllers/InstrutorController');
 const exercicioController = require('./app/controllers/ExercicioController');
 const treinoController = require('./app/controllers/TreinoController');
+const academiaController = require('./app/controllers/AcademiaController');
 
 const routes = new Router();
 
@@ -25,5 +26,7 @@ routes.get('/treino/:id', treinoController.getOne);
 routes.put('/treino', treinoController.update);
 routes.post('/treino', treinoController.create);
 routes.delete('/treino/:id', treinoController.deleteTreino);
+
+routes.get('/academias', academiaController.getAll);
 
 module.exports = routes;
