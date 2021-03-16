@@ -15,6 +15,10 @@ routes.put('/alunos', alunoController.updateAluno);
 routes.delete('/alunos/:id', alunoController.deleteAluno);
 
 routes.get('/instrutores', instrutorController.getAll);
+routes.get('/instrutores/:id', instrutorController.getOne);
+routes.post('/instrutores', instrutorController.create);
+routes.put('/instrutores', instrutorController.updateInstrutor);
+routes.delete('/instrutores/:id', instrutorController.deleteInstrutor);
 
 routes.get('/exercicios', exercicioController.getAll);
 routes.get('/exercicios/:id', exercicioController.getOne);

@@ -48,7 +48,7 @@ const create = async (req, res) => {
 
   try {
     await service.createAluno(nome, email, academia_id);
-    return res.json("Aluno criado com sucesso");
+    return res.json({message: "Aluno criado com sucesso"});
   } catch (error) {
     if (error.constraint === "pessoa_email_key") {
       return res.status(500).json({ error: "Email já cadastrado" });
@@ -85,7 +85,7 @@ const deleteAluno = async (req, res) => {
   if (!id) {
     return res
       .status(401)
-      .json({ error: "Obrigatória a passagem do ID de uma aluno" });
+      .json({ error: "Obrigatória a passagem do ID de um aluno" });
   }
 
   const existsAluno = await service.getAluno(id);
