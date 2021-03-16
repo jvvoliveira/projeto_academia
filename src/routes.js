@@ -32,5 +32,9 @@ routes.post('/treino', treinoController.create);
 routes.delete('/treino/:id', treinoController.deleteTreino);
 
 routes.get('/academias', academiaController.getAll);
+routes.get('/academias/:id', academiaController.getOne);
+routes.post('/academias', academiaController.create);
+routes.put('/academias', academiaController.updateAcademia);
+routes.delete('/academias/:id', academiaController.deleteAcademia);
 
 module.exports = routes;

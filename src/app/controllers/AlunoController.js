@@ -51,7 +51,7 @@ const create = async (req, res) => {
     return res.json({message: "Aluno criado com sucesso"});
   } catch (error) {
     if (error.constraint === "pessoa_email_key") {
-      return res.status(500).json({ error: "Email já cadastrado" });
+      return res.status(401).json({ error: "Email já cadastrado" });
     }
     return res.status(500).json(error);
   }
@@ -75,7 +75,7 @@ const updateAluno = async (req, res) => {
       await service.updateAluno(id, nome, academia_id);
       return res.status(200).json({message: "Aluno atualizado com sucesso"}); 
   }catch(error){
-    return res.status(401).json(error);
+    return res.status(500).json(error);
   }
 };
 
