@@ -8,6 +8,20 @@ const getModalidade = async (id) => {
   );
 };
 
+const getAll = async () => {
+  return database.query("select * from Modalidade");
+};
+
+const create = async (nome) => {
+  const params = { nome };
+  return database.none(
+    "insert into Modalidade(nome) values(${nome})",
+    params
+  );
+};
+
 module.exports = {
-  getModalidade
+  getModalidade,
+  getAll,
+  create
 };
