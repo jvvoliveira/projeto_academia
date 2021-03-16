@@ -1,6 +1,6 @@
 create table Academia(
 	id serial primary key,
-	nome varchar(50) not null
+	nome varchar(50) not null unique
 )
 
 create table Pessoa(
@@ -34,7 +34,7 @@ create table Treino(
 	nome varchar(20) not null,
 	realizacoes integer default 0,
 	foreign key (aluno_id) references Pessoa (id) on delete cascade,
-	foreign key (instrutor_registro) references Instrutor (registro)
+	foreign key (instrutor_registro) references Instrutor (registro) on update cascade
 )
 
 create table Treino_Exercicio(
